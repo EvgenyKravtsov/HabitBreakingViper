@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/standard_screen_background"
+    android:id="@+id/registration_activity_container_view">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            android:textSize="17sp"
+            android:ellipsize="start"
+            android:gravity="center_horizontal"
+            android:theme="@style/CustomEditText"
+            android:id="@+id/registration_activity_email_edit_text"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:inputType="numberDecimal"
+            android:hint="@string/hint_age"
+            android:textSize="17sp"
+            android:ellipsize="start"
+            android:gravity="center_horizontal"
+            android:theme="@style/CustomEditText"
+            android:id="@+id/registration_activity_age_edit_text" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_gender"
+                android:textSize="17sp"
+                android:layout_gravity="center_vertical" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/registration_activity_gender_radio_group">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male_button_label"
+                    android:textSize="17sp"
+                    android:id="@+id/registration_activity_male_radio_button"
+                    app:buttonTint="@color/colorPrimaryDark" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female_button_label"
+                    android:textSize="17sp"
+                    android:id="@+id/registration_activity_female_radio_button"
+                    app:buttonTint="@color/colorPrimaryDark" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/send_button_label"
+            android:id="@+id/registration_activity_send_button"
+            android:theme="@style/RedButton" />
+
+    </LinearLayout>
+
+</FrameLayout>

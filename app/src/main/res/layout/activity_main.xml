@@ -1,23 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context=".view.MainActivity">
+    android:background="@drawable/standard_screen_background"
+    android:animateLayoutChanges="true"
+    android:id="@+id/main_activity_container_view"
+    tools:context=".view.activity.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CONSUME"
-        android:id="@+id/main_activity_consume_button" />
+        android:layout_alignParentTop="true"
+        android:id="@+id/main_activity_toolbar" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_activity_timer_value_text_view"
-        tools:text="00:00:00" />
+    <!-- Consume Button Group -->
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_below="@+id/main_activity_toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="40dp"
+        android:background="@drawable/consume_button_background"
+        android:id="@+id/main_activity_consume_button">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/consume_button_icon"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/consume_button_content_description" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="3dp"
+            android:background="@android:color/white" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:id="@+id/main_activity_timer_value_text_view"
+            tools:text="00:00:00" />
+
+    </LinearLayout>
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:id="@+id/main_activity_statistic_chart_view" />
+
+</RelativeLayout>

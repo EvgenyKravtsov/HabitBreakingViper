@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">Habit Breaking</string>
+
+    <!-- Main Activity Strings -->
+    <string name="consume_button_tip">Нажмите и удерживайте</string>
+    <string name="too_early_to_smoke_warning">Слишком рано</string>
+    <string name="statistic_restore_success_message">Статистика успешно восстановлена</string>
+    <string name="no_data_for_email_warning">Данные не найдены. Возможно, неверно указан адрес
+                                                электронной почты</string>
+    <string name="synchronization_message">Для сохранения статистики на сервере необходимо зарегистрироваться.
+                                            Сохраненные данне можно будет восстановить, например, в случае
+                                            переустановки приложения</string>
+    <string name="register_button_label">Регистрация</string>
+    <string name="restore_button_label">Восстановление</string>
+
+    <!-- Modes Activity Strings -->
+    <string name="modes_activity_label">Выберите режим</string>
+    <string name="activate_button_label">Выбрать</string>
+    <string name="activated_button_label">Активирован</string>
+    <string name="not_enough_statistic_warning">Накоплено недостаточно статистики потребления.
+                                                Нужно еще %d дней</string>
+    <string name="free_mode_name">Свободный</string>
+    <string name="free_mode_description">Данный режим не накладывает никаких ограничений на потребление.
+                                        Его основная задача - накопление статистики</string>
+    <string name="control_mode_name">Контроль</string>
+    <string name="control_mode_description">В режиме контроля приложение ограничивает потребление сигарет
+                                            на основе вашего индивидуального среднего показателя.
+                                            Режим будет полезен, если вы хотите сохранить потребление
+                                            сигарет на одном уровне</string>
+    <string name="health_mode_name">Снижение</string>
+    <string name="health_mode_description">Режим снижения пригодится тем, кто хотел бы избавиться от
+                                            вредной привычки. Специальный алгоритм будет постепенно
+                                            снижать частоту потребления табака, делая процесс отказа
+                                            от курения более комфортным</string>
+
+    <!-- Registration Activity Strings -->
+    <string name="registration_activity_label">Регистрация</string>
+    <string name="registration_success_message">Регистрация успешно пройдена. Теперь ваша статистика
+                                                будет сохраняться на сервере</string>
+    <string name="email_already_registered_waring">Указанный почтовый адрес уже зарегистрирован в
+                                                    нашей системе</string>
+    <string name="incorrect_gender_warning">Укажите пол</string>
+    <string name="incorrect_age_warning">Укажите корректный возраст</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_age">Возраст</string>
+    <string name="hint_gender">Пол</string>
+    <string name="male_button_label">Мужской</string>
+    <string name="female_button_label">Женский</string>
+    <string name="send_button_label">Отправить</string>
+
+    <!-- General Strings -->
+    <string name="no_internet_connection_warning">Отсутствует интернет-соединение</string>
+    <string name="downloading_process_warning">Загрузка данных</string>
+    <string name="sending_process_warning">Отправка данных</string>
+    <string name="incorrect_email_warning">Неверный почтовый адрес</string>
+    <string name="server_side_error_warning">Ошибка в работе удаленного сервера. Мы постараемся
+                                            исправить ее в ближайшее время</string>
+
+    <!-- Content Description Strings -->
+    <string name="consume_button_content_description">Счетчик потребления</string>
+    <string name="free_mode_icon_content_description">Свободный режим</string>
+    <string name="control_mode_icon_content_description">Режим контроля</string>
+    <string name="health_mode_icon_content_description">Режим снижения потребления</string>
+
+</resources>

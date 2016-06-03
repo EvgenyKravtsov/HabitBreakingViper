@@ -6,6 +6,13 @@
     <!-- Boot permissions -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- Internet permission -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Vibrate permission -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".domain.os.AppController"
         android:allowBackup="true"
@@ -15,12 +22,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activity.ModesActivity"
+            android:label="@string/modes_activity_label"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.RegistrationActivity"
+            android:label="@string/registration_activity_label"
+            android:screenOrientation="portrait" />
 
         <service android:name=".domain.ConsumptionManagerService" />
 
@@ -29,6 +48,14 @@
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".domain.os.ConnectivityChangeReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
