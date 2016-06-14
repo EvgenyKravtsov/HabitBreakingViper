@@ -244,7 +244,7 @@ public class SocketClient implements ServerConnection {
         message.put("TYPE", "REGISTRATION");
         message.put("EMAIL", entity.getEmail());
         message.put("GENDER", entity.getGender());
-        message.put("AGE", entity.getAge());
+        message.put("AGE", entity.getDateOfBirth());
         message.put("REGISTRATION_DATE", entity.getRegistrationDate());
         return message;
     }

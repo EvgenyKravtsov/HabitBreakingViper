@@ -40,19 +40,26 @@
     <string name="email_already_registered_waring">Указанный почтовый адрес уже зарегистрирован в
                                                     нашей системе</string>
     <string name="incorrect_gender_warning">Укажите пол</string>
-    <string name="incorrect_age_warning">Укажите корректный возраст</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_age">Возраст</string>
+    <string name="incorrect_date_of_birth_warning">Укажите дату рождения</string>
+    <string name="hint_name">Имя</string>
+    <string name="hint_date_of_birth">Дата рождения</string>
     <string name="hint_gender">Пол</string>
     <string name="male_button_label">Мужской</string>
     <string name="female_button_label">Женский</string>
     <string name="send_button_label">Отправить</string>
+    <string-array name="secret_question_array">
+        <item>Девичья фамилия матери?</item>
+        <item>На какой улице вы жили в третьем классе?</item>
+        <item>В какой стране находится отдых вашей мечты?</item>
+        <item>Кто был героем вашего детства?</item>
+        <item>Какой ваш любимый спорт?</item>
+    </string-array>
 
     <!-- General Strings -->
     <string name="no_internet_connection_warning">Отсутствует интернет-соединение</string>
     <string name="downloading_process_warning">Загрузка данных</string>
     <string name="sending_process_warning">Отправка данных</string>
-    <string name="incorrect_email_warning">Неверный почтовый адрес</string>
+    <string name="incorrect_name_warning">Укажите имя</string>
     <string name="server_side_error_warning">Ошибка в работе удаленного сервера. Мы постараемся
                                             исправить ее в ближайшее время</string>
 

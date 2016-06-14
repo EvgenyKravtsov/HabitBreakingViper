@@ -2,32 +2,32 @@ package evgenykravtsov.habitbreaking.domain.model;
 
 public class RegistrationDataEntity {
 
-    private final String email;
+    private final String name;
     private final int gender;
-    private final int age;
+    private final long dateOfBirth; // Unix Timestamp
     private final long registrationDate;
 
     //// CONSTRUCTORS
 
-    public RegistrationDataEntity(String email, int gender, int age, long registrationDate) {
-        this.email = email;
+    public RegistrationDataEntity(String name, int gender, long dateOfBirth, long registrationDate) {
+        this.name = name;
         this.gender = gender;
-        this.age = age;
+        this.dateOfBirth = dateOfBirth;
         this.registrationDate = registrationDate;
     }
 
     //// PUBLIC METHODS
 
     public String getEmail() {
-        return email;
+        return name;
     }
 
     public int getGender() {
         return gender;
     }
 
-    public int getAge() {
-        return age;
+    public long getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public long getRegistrationDate() {
@@ -39,7 +39,7 @@ public class RegistrationDataEntity {
 
     @Override
     public String toString() {
-        return "Registration Data: Email - " + email + " | Gender - " + gender
-                + " | Age - " + age + " | RegistrationDate - " + registrationDate;
+        return "Registration Data: Name - " + name + " | Gender - " + gender
+                + " | Date Of Birth - " + dateOfBirth + " | RegistrationDate - " + registrationDate;
     }
 }

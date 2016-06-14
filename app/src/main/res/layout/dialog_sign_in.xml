@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="@string/hint_email"
+        android:hint="@string/hint_name"
         android:textSize="17sp"
         android:ellipsize="start"
         android:gravity="center_horizontal"

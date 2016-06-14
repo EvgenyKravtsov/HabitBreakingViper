@@ -20,25 +20,23 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="@string/hint_email"
+            android:inputType="text"
+            android:hint="@string/hint_name"
             android:textSize="17sp"
             android:ellipsize="start"
             android:gravity="center_horizontal"
             android:theme="@style/CustomEditText"
-            android:id="@+id/registration_activity_email_edit_text"/>
+            android:id="@+id/registration_activity_name_edit_text"/>
 
-        <EditText
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:inputType="numberDecimal"
-            android:hint="@string/hint_age"
+            android:text="@string/hint_date_of_birth"
             android:textSize="17sp"
-            android:ellipsize="start"
-            android:gravity="center_horizontal"
-            android:theme="@style/CustomEditText"
-            android:id="@+id/registration_activity_age_edit_text" />
+            android:textAllCaps="false"
+            android:theme="@style/GreenButton"
+            android:id="@+id/registration_activity_date_of_birth_button" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -78,6 +76,11 @@
             </RadioGroup>
 
         </LinearLayout>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/registration_activity_secret_question_spinner" />
 
         <Button
             android:layout_width="wrap_content"

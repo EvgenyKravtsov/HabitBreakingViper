@@ -13,6 +13,11 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:divider">@color/colorPrimary</item>
+    </style>
+
     <style name="RedButton" parent="Theme.AppCompat.Light">
         <item name="colorButtonNormal">@color/colorContrast</item>
         <item name="android:textColorPrimary">@android:color/white</item>

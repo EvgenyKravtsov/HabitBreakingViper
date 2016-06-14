@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     String registerButtonLabel;
     @BindString(R.string.restore_button_label)
     String restoreButtonLabel;
-    @BindString(R.string.incorrect_email_warning)
+    @BindString(R.string.incorrect_name_warning)
     String incorrectEmailWarning;
 
     @BindDrawable(R.drawable.consume_button_background)
