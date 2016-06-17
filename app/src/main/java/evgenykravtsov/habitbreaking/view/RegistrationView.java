@@ -6,9 +6,11 @@ public interface RegistrationView {
 
     void notifyRegistrationSuccess();
 
-    void notifyDuplicateUserName();
-
     void notifyConnectionError();
+
+    void notifyNoStatisticForUser();
+
+    void notifyStatisticRestored();
 
     void showProgress();
 

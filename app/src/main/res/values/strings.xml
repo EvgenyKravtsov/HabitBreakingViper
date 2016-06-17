@@ -1,15 +1,19 @@
 <resources>
-    <string name="app_name">Habit Breaking</string>
+    <string name="app_name">HABBIT-BREAKIT</string>
 
     <!-- Main Activity Strings -->
     <string name="consume_button_tip">Tap and hold</string>
     <string name="too_early_to_smoke_warning">Too early to smoke</string>
     <string name="statistic_restore_success_message">Statistic successfuly restored</string>
-    <string name="no_data_for_email_warning">No data found</string>
     <string name="synchronization_message">Registration is required for statistic synchronization with server.
                                             Synchronized statistic can be restored in case of app reinstall</string>
+    <string name="registration_process_hint">Registration is required for statistic synchronization
+                                        with server. Synchronized statistic can be restored</string>
+    <string name="restore_process_hint">Enter your registration data</string>
     <string name="register_button_label">Register</string>
     <string name="restore_button_label">Restore</string>
+    <string name="modes_button_label">Modes</string>
+    <string name="user_deleted_warning">Your account was successfuly deleted</string>
 
     <!-- Modes Activity Strings -->
     <string name="modes_activity_label">Choose mode</string>
@@ -29,17 +33,30 @@
                                             Mode. Speacial algorythms will increase non-smoking interval
                                             over time and will help you decrease consumption in
                                             comfortable manner</string>
+    <string name="delete_statistic_button_label">Delete statistic</string>
+    <string name="restore_statistic_button_label">Restore statistic</string>
+    <string name="delete_account_button_label">Delete account</string>
+    <string name="statistic_cleared_warning">Statistic successfuly deleted</string>
 
     <!-- Registration Activity Strings -->
     <string name="registration_activity_label">Registration</string>
+    <string name="registration_activity_label_for_statistic_restore">Restore</string>
     <string name="registration_success_message">Registration successfuly completed. Your consumption
                                                 statistic will be synchronized with server</string>
-    <string name="email_already_registered_waring">Given email is already registered in our system</string>
+    <string name="incorrect_name_warning">Name field must not be empty</string>
+    <string name="no_data_for_user_warning">No data found</string>
+    <string name="statistic_restored_warning">Statistic successfuly restored</string>
+    <string name="incorrect_date_of_birth_warning">Choose correct date of birth, please</string>
     <string name="incorrect_gender_warning">Choose gender, please</string>
-    <string name="incorrect_date_of_birth_warning">Choose date of birth, please</string>
+    <string name="incorrect_secret_answer_warning">Enter secret question\'s answer</string>
     <string name="hint_name">Name</string>
-    <string name="hint_date_of_birth">Date of Birth</string>
-    <string name="hint_gender">Gender</string>
+    <string name="hint_date_of_birth">Date of Birth:</string>
+    <string name="hint_gender">Gender:</string>
+    <string name="hint_day">Day</string>
+    <string name="hint_month">Month</string>
+    <string name="hint_year">Year</string>
+    <string name="hint_answer">Answer</string>
+    <string name="hint_secret_question">Secret Question</string>
     <string name="male_button_label">Male</string>
     <string name="female_button_label">Female</string>
     <string name="send_button_label">Send</string>
@@ -47,15 +64,28 @@
         <item>Mother\'s maiden name?</item>
         <item>On what street you lived in the third grade?</item>
         <item>In which country is your dream vacation?</item>
-        <item>Who was your childhood hero?</item>
+        <item>Brand of your first car?</item>
         <item>What\'s your favorite sport?</item>
+    </string-array>
+    <string-array name="month_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 
     <!-- General Strings -->
     <string name="no_internet_connection_warning">No internet connection available</string>
     <string name="downloading_process_warning">Downloading data</string>
     <string name="sending_process_warning">Sending data</string>
-    <string name="incorrect_name_warning">Name field must not be empty</string>
     <string name="server_side_error_warning">Error occurred on server. Trying to fix it</string>
 
     <!-- Content Description Strings -->

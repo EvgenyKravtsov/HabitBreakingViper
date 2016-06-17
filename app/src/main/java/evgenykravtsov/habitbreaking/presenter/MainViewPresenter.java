@@ -13,12 +13,16 @@ import evgenykravtsov.habitbreaking.data.Event.StatisticSavedEvent;
 import evgenykravtsov.habitbreaking.domain.event.ConsumptionTimeDifferenceEvent;
 import evgenykravtsov.habitbreaking.domain.model.StatisticDataEntity;
 import evgenykravtsov.habitbreaking.interactor.ConsumptionInteractor;
+import evgenykravtsov.habitbreaking.interactor.DeleteUserInteractor;
+import evgenykravtsov.habitbreaking.interactor.DeleteStatisticInteractor;
 import evgenykravtsov.habitbreaking.interactor.DownloadStatisticInteractor;
 import evgenykravtsov.habitbreaking.interactor.GetStatisticForPeriodInteractor;
+import evgenykravtsov.habitbreaking.interactor.SendStatisticDataInteractor;
 import evgenykravtsov.habitbreaking.interactor.event.ConsumptionLockEvent;
+import evgenykravtsov.habitbreaking.interactor.event.StatisticClearedEvent;
 import evgenykravtsov.habitbreaking.network.event.DownloadDataEvent;
 import evgenykravtsov.habitbreaking.network.event.NoInternetConnectionEvent;
-import evgenykravtsov.habitbreaking.network.event.NoStatisticForEmailEvent;
+import evgenykravtsov.habitbreaking.network.event.UserDeletedEvent;
 import evgenykravtsov.habitbreaking.view.MainView;
 
 public class MainViewPresenter {
@@ -51,8 +55,9 @@ public class MainViewPresenter {
         new ConsumptionInteractor().interact();
     }
 
-    public void restoreStatisticData(String email) {
-        new DownloadStatisticInteractor().interact(email);
+    public void restoreStatisticData() {
+        long registrationDate = applicationDataStorage.loadRegistrationDate();
+        new DownloadStatisticInteractor().interact(registrationDate);
     }
 
     public List<StatisticDataEntity> getStatisticToDisplay(int numberOfDays) {
@@ -61,6 +66,29 @@ public class MainViewPresenter {
 
     public void saveUserName(String userName) {
         applicationDataStorage.saveUserName(userName);
+    }
+
+    public void sendStatistic() {
+        SendStatisticDataInteractor interactor = new SendStatisticDataInteractor();
+        interactor.interact();
+    }
+
+    public boolean isUserRegistered() {
+        return applicationDataStorage.loadRegistrationDate() !=
+                ApplicationDataStorage.DEFAULT_REGISTRATION_DATE_VALUE &&
+                !applicationDataStorage.loadUserName().equals(ApplicationDataStorage.DEFAULT_USER_NAME_VALUE);
+    }
+
+    public void deleteStatistic() {
+        new DeleteStatisticInteractor().interact();
+    }
+
+    public void deleteUser() {
+        new DeleteUserInteractor().interact();
+    }
+
+    public String getUserName() {
+        return applicationDataStorage.loadUserName();
     }
 
     //// PRIVATE METHODS
@@ -116,7 +144,12 @@ public class MainViewPresenter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onNoStatisticForEmailEvent(NoStatisticForEmailEvent event) {
-        view.notifyNoStatisticForEmail();
+    public void onEvent(StatisticClearedEvent event) {
+        view.notifyStatisticCleared();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(UserDeletedEvent event) {
+        view.notifyUserDeleted();
     }
 }

@@ -1,17 +1,20 @@
 <resources>
-    <string name="app_name">Habit Breaking</string>
+    <string name="app_name">HABBIT-BREAKIT</string>
 
     <!-- Main Activity Strings -->
     <string name="consume_button_tip">Нажмите и удерживайте</string>
     <string name="too_early_to_smoke_warning">Слишком рано</string>
     <string name="statistic_restore_success_message">Статистика успешно восстановлена</string>
-    <string name="no_data_for_email_warning">Данные не найдены. Возможно, неверно указан адрес
-                                                электронной почты</string>
     <string name="synchronization_message">Для сохранения статистики на сервере необходимо зарегистрироваться.
                                             Сохраненные данне можно будет восстановить, например, в случае
                                             переустановки приложения</string>
+    <string name="registration_process_hint">Для сохранения статистики на сервере необходимо
+                        зарегистрироваться. Сохраненные на сервере данные можно восстановить</string>
+    <string name="restore_process_hint">Введите данные, указанные при регистрации</string>
     <string name="register_button_label">Регистрация</string>
     <string name="restore_button_label">Восстановление</string>
+    <string name="modes_button_label">Режимы работы</string>
+    <string name="user_deleted_warning">Ваш аккаунт был успешно удален</string>
 
     <!-- Modes Activity Strings -->
     <string name="modes_activity_label">Выберите режим</string>
@@ -32,18 +35,30 @@
                                             вредной привычки. Специальный алгоритм будет постепенно
                                             снижать частоту потребления табака, делая процесс отказа
                                             от курения более комфортным</string>
+    <string name="delete_statistic_button_label">Удалить статистику</string>
+    <string name="restore_statistic_button_label">Восстановить статистику</string>
+    <string name="delete_account_button_label">Удалить аккаунт</string>
+    <string name="statistic_cleared_warning">Статистика успешно удалена</string>
 
     <!-- Registration Activity Strings -->
     <string name="registration_activity_label">Регистрация</string>
+    <string name="registration_activity_label_for_statistic_restore">Восстановление</string>
     <string name="registration_success_message">Регистрация успешно пройдена. Теперь ваша статистика
                                                 будет сохраняться на сервере</string>
-    <string name="email_already_registered_waring">Указанный почтовый адрес уже зарегистрирован в
-                                                    нашей системе</string>
+    <string name="incorrect_name_warning">Укажите имя</string>
+    <string name="no_data_for_user_warning">Данные не найдены. Возможно, неверные данные</string>
+    <string name="statistic_restored_warning">Статистика успешно восстановлена</string>
+    <string name="incorrect_date_of_birth_warning">Укажите корректную дату рождения</string>
     <string name="incorrect_gender_warning">Укажите пол</string>
-    <string name="incorrect_date_of_birth_warning">Укажите дату рождения</string>
+    <string name="incorrect_secret_answer_warning">Укажите ответ на секретный вопрос</string>
     <string name="hint_name">Имя</string>
-    <string name="hint_date_of_birth">Дата рождения</string>
-    <string name="hint_gender">Пол</string>
+    <string name="hint_date_of_birth">Дата рождения:</string>
+    <string name="hint_gender">Пол:</string>
+    <string name="hint_day">День</string>
+    <string name="hint_month">Месяц</string>
+    <string name="hint_year">Год</string>
+    <string name="hint_answer">Ответ</string>
+    <string name="hint_secret_question">Секретный вопрос</string>
     <string name="male_button_label">Мужской</string>
     <string name="female_button_label">Женский</string>
     <string name="send_button_label">Отправить</string>
@@ -51,15 +66,28 @@
         <item>Девичья фамилия матери?</item>
         <item>На какой улице вы жили в третьем классе?</item>
         <item>В какой стране находится отдых вашей мечты?</item>
-        <item>Кто был героем вашего детства?</item>
+        <item>Марка вашего первого автомобиля?</item>
         <item>Какой ваш любимый спорт?</item>
+    </string-array>
+    <string-array name="month_array">
+        <item>января</item>
+        <item>февраля</item>
+        <item>марта</item>
+        <item>апреля</item>
+        <item>мая</item>
+        <item>июня</item>
+        <item>июля</item>
+        <item>августа</item>
+        <item>сентября</item>
+        <item>октября</item>
+        <item>ноября</item>
+        <item>декабря</item>
     </string-array>
 
     <!-- General Strings -->
     <string name="no_internet_connection_warning">Отсутствует интернет-соединение</string>
     <string name="downloading_process_warning">Загрузка данных</string>
     <string name="sending_process_warning">Отправка данных</string>
-    <string name="incorrect_name_warning">Укажите имя</string>
     <string name="server_side_error_warning">Ошибка в работе удаленного сервера. Мы постараемся
                                             исправить ее в ближайшее время</string>
 

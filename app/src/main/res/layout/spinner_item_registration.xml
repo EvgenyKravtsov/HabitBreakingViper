@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:singleLine="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:textAlignment="inherit"
+    android:textSize="17sp"
+    android:background="@drawable/registration_edit_text_background"
+    android:padding="4dp"
+    android:id="@android:id/text1"
+    tools:ignore="UnusedAttribute"
+    style="?android:attr/spinnerItemStyle" />

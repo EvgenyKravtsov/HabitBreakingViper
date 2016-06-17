@@ -10,7 +10,9 @@ public interface MainView {
 
     void notifyStatisticSaved();
 
-    void notifyNoStatisticForEmail();
+    void notifyStatisticCleared();
+
+    void notifyUserDeleted();
 
     void showProgress();
 

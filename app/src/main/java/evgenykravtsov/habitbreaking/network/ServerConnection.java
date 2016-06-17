@@ -15,5 +15,9 @@ public interface ServerConnection {
 
     void sendRegistrationData(RegistrationDataEntity entry);
 
-    void getStatistic(String email);
+    void sendRestorationData(RegistrationDataEntity entity);
+
+    void getStatistic(long registrationDate);
+
+    void sendDeleteUserQuery(long registrationDate);
 }

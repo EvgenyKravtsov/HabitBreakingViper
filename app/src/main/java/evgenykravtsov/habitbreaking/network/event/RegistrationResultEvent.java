@@ -3,7 +3,7 @@ package evgenykravtsov.habitbreaking.network.event;
 public class RegistrationResultEvent {
 
     private final int resultCode;
-    // 0 - success, 1 - duplicate, 2 - connection error
+    // 0 - success, 1 - connection error
 
     //// CONSTRUCTORS
 

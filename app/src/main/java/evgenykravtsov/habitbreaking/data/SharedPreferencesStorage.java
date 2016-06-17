@@ -108,6 +108,17 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
                 ApplicationDataStorage.DEFAULT_USER_NAME_VALUE);
     }
 
+    @Override
+    public void saveRegistrationDate(long registrationDate) {
+        saveLong(ApplicationDataStorage.KEY_REGISTRATION_DATE, registrationDate);
+    }
+
+    @Override
+    public long loadRegistrationDate() {
+        return  loadLong(ApplicationDataStorage.KEY_REGISTRATION_DATE,
+                ApplicationDataStorage.DEFAULT_REGISTRATION_DATE_VALUE);
+    }
+
     //// PRIVATE METHODS
 
     private void saveLong(String key, long value) {

@@ -1,9 +1,7 @@
 package evgenykravtsov.habitbreaking.view.activity;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -11,15 +9,15 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private static final int NUMBER_OF_DAYS_FOR_STATISTIC = 7;
 
-    private static String emailSwap;
-
     private MainViewPresenter presenter;
     private ProgressDialog progressDialog;
 
@@ -67,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     String noInternetConnectionWarning;
     @BindString(R.string.statistic_restore_success_message)
     String statisticRestoreSuccessMessage;
-    @BindString(R.string.no_data_for_email_warning)
-    String noDataForEmailWarning;
     @BindString(R.string.downloading_process_warning)
     String downloadingProcessWarning;
     @BindString(R.string.synchronization_message)
@@ -79,12 +73,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
     String restoreButtonLabel;
     @BindString(R.string.incorrect_name_warning)
     String incorrectEmailWarning;
+    @BindString(R.string.statistic_cleared_warning)
+    String statisticClearedWarning;
+    @BindString(R.string.user_deleted_warning)
+    String userDeletedWarning;
 
     @BindDrawable(R.drawable.consume_button_background)
     Drawable consumeButtonDrawable;
     @BindDrawable(R.drawable.consume_button_locked_background)
     Drawable consumeButtonLockedDrawable;
 
+    @BindView(R.id.main_activity_drawer_layout)
+    DrawerLayout drawerLayout;
     @BindView(R.id.main_activity_container_view)
     RelativeLayout containerView;
     @BindView(R.id.toolbar)
@@ -95,6 +95,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
     LinearLayout consumeButton;
     @BindView(R.id.main_activity_statistic_chart_view)
     LineChartView statisticChartView;
+    @BindView(R.id.main_activity_modes_button)
+    Button modesButton;
+    @BindView(R.id.main_activity_registraion_button)
+    Button registrationButton;
+    @BindView(R.id.main_activity_delete_statistic_button)
+    Button deleteStatisticButton;
+    @BindView(R.id.main_activity_restore_statistic_button)
+    Button restoreStatisticButton;
+    @BindView(R.id.main_activity_delete_account_button)
+    Button deleteAccountButton;
+    @BindView(R.id.main_activity_user_name_text_view)
+    TextView userNameTextView;
 
     @OnClick(R.id.main_activity_consume_button)
     public void onClickConsumeButton(View view) {
@@ -116,7 +128,33 @@ public class MainActivity extends AppCompatActivity implements MainView {
         vibe.vibrate(50);
                 presenter.countConsumption();
         showStatistic(presenter.getStatisticToDisplay(NUMBER_OF_DAYS_FOR_STATISTIC));
+        presenter.sendStatistic();
         return true;
+    }
+
+    @OnClick(R.id.main_activity_modes_button)
+    public void onClickModesButton() {
+        navigateToModesActivity();
+    }
+
+    @OnClick(R.id.main_activity_registraion_button)
+    public void onRegistrationButtonClicked() {
+        navigateToRegistrationActivity();
+    }
+
+    @OnClick(R.id.main_activity_delete_statistic_button)
+    public void onDeleteStatisticButtonClicked() {
+        presenter.deleteStatistic();
+    }
+
+    @OnClick(R.id.main_activity_restore_statistic_button)
+    public void onRestoreStatisticButtonClicked() {
+        navigateToRegistrationActivityForStatisticRestore();
+    }
+
+    @OnClick(R.id.main_activity_delete_account_button)
+    public void onDeleteAccountButtonClicked() {
+        presenter.deleteUser();
     }
 
     //// ACTIVITY LIFECYCLE
@@ -135,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onStart();
         presenter = new MainViewPresenter();
         presenter.bind(this);
+        prepareDrawerMenu();
     }
 
     @Override
@@ -161,11 +200,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.main_activity_sync_button:
-                notifyRegistration();
-                break;
-            case R.id.main_activity_modes_button:
-                navigateToModesActivity();
+            case R.id.main_activity_menu_button:
+                drawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
         return true;
@@ -200,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void notifyStatisticSaved() {
-        presenter.saveUserName(emailSwap);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(statisticRestoreSuccessMessage)
                 .setPositiveButton(getString(android.R.string.ok), null)
@@ -210,13 +245,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void notifyNoStatisticForEmail() {
+    public void notifyStatisticCleared() {
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setMessage(noDataForEmailWarning)
+                .setMessage(statisticClearedWarning)
                 .setPositiveButton(getString(android.R.string.ok), null)
                 .create();
         dialog.show();
-        hideProgress();
+        showStatistic(presenter.getStatisticToDisplay(NUMBER_OF_DAYS_FOR_STATISTIC));
+    }
+
+    @Override
+    public void notifyUserDeleted() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setMessage(userDeletedWarning)
+                .setPositiveButton(getString(android.R.string.ok), null)
+                .create();
+        dialog.show();
+        prepareDrawerMenu();
     }
 
     @Override
@@ -248,23 +293,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         startActivity(startRegistrationActivity);
     }
 
-    private void notifyRegistration() {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setMessage(synchronizationMessage)
-                .setPositiveButton(registerButtonLabel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        navigateToRegistrationActivity();
-                    }
-                })
-                .setNegativeButton(restoreButtonLabel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        showSignInDialog();
-                    }
-                })
-                .create();
-        dialog.show();
+    private void navigateToRegistrationActivityForStatisticRestore() {
+        Intent startRegistrationActivity = new Intent(this, RegistrationActivity.class);
+        startRegistrationActivity.putExtra(RegistrationActivity.KEY_STATISTIC_RESTORE_INTENT, true);
+        startActivity(startRegistrationActivity);
     }
 
     private void showStatistic(List<StatisticDataEntity> statisticData) {
@@ -330,6 +362,19 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setSupportActionBar(toolbar);
     }
 
+    private void prepareDrawerMenu() {
+        if (presenter.isUserRegistered()) {
+            userNameTextView.setVisibility(View.GONE);
+            userNameTextView.setText(presenter.getUserName());
+            registrationButton.setVisibility(View.GONE);
+            deleteAccountButton.setVisibility(View.VISIBLE);
+        } else {
+            userNameTextView.setVisibility(View.GONE);
+            registrationButton.setVisibility(View.VISIBLE);
+            deleteAccountButton.setVisibility(View.GONE);
+        }
+    }
+
     private String formatDateForStatisticChart(long date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(date * 1000);
@@ -357,36 +402,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private void setFonts() {
         Typeface robotoTypeface = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
         timerValueTextView.setTypeface(robotoTypeface);
-    }
-
-    private void showSignInDialog() {
-        @SuppressLint("InflateParams") View signInView = (LinearLayout) getLayoutInflater()
-                .inflate(R.layout.dialog_sign_in, null);
-        final EditText emailEditText = (EditText) signInView
-                .findViewById(R.id.dialog_sign_in_email_edit_text);
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(signInView)
-                .setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String email = emailEditText.getText().toString();
-
-                        if (validateEmail(email)) {
-                            emailSwap = email;
-                            presenter.restoreStatisticData(email);
-                        } else {
-                            Snackbar.make(containerView, incorrectEmailWarning,
-                                    Snackbar.LENGTH_LONG).show();
-                        }
-
-                    }
-                })
-                .create();
-        dialog.show();
-    }
-
-    private boolean validateEmail(String email) {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        modesButton.setTypeface(robotoTypeface);
+        registrationButton.setTypeface(robotoTypeface);
+        deleteStatisticButton.setTypeface(robotoTypeface);
+        restoreStatisticButton.setTypeface(robotoTypeface);
+        deleteAccountButton.setTypeface(robotoTypeface);
     }
 }

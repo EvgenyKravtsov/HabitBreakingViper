@@ -20,6 +20,8 @@ public interface ApplicationDataStorage {
     boolean DEFAULT_CONSUMPTION_LOCK_STATUS_VALUE = false;
     String KEY_USER_NAME = "key_user_name";
     String DEFAULT_USER_NAME_VALUE = "";
+    String KEY_REGISTRATION_DATE = "key_registration_date";
+    long DEFAULT_REGISTRATION_DATE_VALUE = 0;
 
     ////
 
@@ -50,4 +52,8 @@ public interface ApplicationDataStorage {
     void saveUserName(String userName);
 
     String loadUserName();
+
+    void saveRegistrationDate(long registrationDate);
+
+    long loadRegistrationDate();
 }

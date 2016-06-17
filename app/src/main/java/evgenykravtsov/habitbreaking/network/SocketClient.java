@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -24,13 +25,16 @@ import evgenykravtsov.habitbreaking.data.StatisticDataStorage;
 import evgenykravtsov.habitbreaking.domain.model.RegistrationDataEntity;
 import evgenykravtsov.habitbreaking.domain.model.StatisticDataEntity;
 import evgenykravtsov.habitbreaking.domain.os.AppController;
+import evgenykravtsov.habitbreaking.interactor.DownloadStatisticInteractor;
 import evgenykravtsov.habitbreaking.network.event.DownloadDataEvent;
+import evgenykravtsov.habitbreaking.network.event.NoStatisticForUserEvent;
 import evgenykravtsov.habitbreaking.network.event.RegistrationResultEvent;
+import evgenykravtsov.habitbreaking.network.event.UserDeletedEvent;
 
 public class SocketClient implements ServerConnection {
 
-    private static final String SERVER_ADDRESS = "195.42.183.52";
-    private static final int SERVER_PORT = 8080;
+    private static final String SERVER_ADDRESS = "10.0.3.99";       //"195.42.183.52";
+    private static final int SERVER_PORT = 8080;             //8080;
     private static final int CONNECTION_TIMEOUT_INTERVAL = 5000; // Milliseconds
 
     // Module dependencies
@@ -62,10 +66,6 @@ public class SocketClient implements ServerConnection {
 
     @Override
     public void sendStatisticData(final List<StatisticDataEntity> statisticData) {
-
-        // TODO Delete test code
-        Log.d(AppController.APP_TAG, "Send Statistic Data Called With - " + statisticData.get(0).toString());
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -136,9 +136,33 @@ public class SocketClient implements ServerConnection {
     }
 
     @Override
-    public void getStatistic(String email) {
+    public void sendRestorationData(RegistrationDataEntity entity) {
+        // TODO Delete test code
+        Log.d(AppController.APP_TAG, "Send Restoration Data Called With - " + entity.toString());
+
         try {
-            sendJsonMessage(ServerQueryType.GET_STATISTIC, generateJsonForGetStatistic(email));
+            sendJsonMessage(ServerQueryType.RESTORE_USER, formatRestorationDataToJson(entity));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getStatistic(long registrationDate) {
+        try {
+            sendJsonMessage(ServerQueryType.GET_STATISTIC, generateJsonForGetStatistic(registrationDate));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendDeleteUserQuery(long registrationDate) {
+        // TODO Delete test code
+        Log.d(AppController.APP_TAG, "Send Delete Account Called With - " + registrationDate);
+
+        try {
+            sendJsonMessage(ServerQueryType.RESTORE_USER, formatDeleteUserDataToJson(registrationDate));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -163,7 +187,7 @@ public class SocketClient implements ServerConnection {
             Log.d(AppController.APP_TAG, "Connection Process Finished");
         } catch (IOException e) {
             e.printStackTrace();
-            EventBus.getDefault().post(new RegistrationResultEvent(2));
+            EventBus.getDefault().post(new RegistrationResultEvent(1));
         }
     }
 
@@ -199,7 +223,8 @@ public class SocketClient implements ServerConnection {
                             socketListener.threadStatus = true;
                             socketListener.queryType = queryType;
                             if (queryType == ServerQueryType.WRITE_USER) {
-                                socketListener.userName = message.getString("EMAIL");
+                                socketListener.userName = message.getString("NAME");
+                                socketListener.registrationDate = message.getLong("REGISTRATION_DATE");
                             }
                             new Thread(socketListener).start();
                             socketListenerCounter++;
@@ -230,10 +255,10 @@ public class SocketClient implements ServerConnection {
     }
 
     private JSONObject formatStatitsticDataToJson(StatisticDataEntity entity) throws JSONException {
-        String userName = applicationDataStorage.loadUserName();
+        long registrationDate = applicationDataStorage.loadRegistrationDate();
         JSONObject message = new JSONObject();
         message.put("TYPE", "STATISTIC");
-        message.put("EMAIL", userName);
+        message.put("REGISTRATION_DATE", registrationDate);
         message.put("DATE", entity.getDate());
         message.put("COUNT", entity.getCount());
         return message;
@@ -242,17 +267,37 @@ public class SocketClient implements ServerConnection {
     private JSONObject formatRegistrationDataToJson(RegistrationDataEntity entity) throws JSONException {
         JSONObject message = new JSONObject();
         message.put("TYPE", "REGISTRATION");
-        message.put("EMAIL", entity.getEmail());
+        message.put("NAME", entity.getName());
         message.put("GENDER", entity.getGender());
-        message.put("AGE", entity.getDateOfBirth());
+        message.put("DATE_OF_BIRTH", entity.getDateOfBirth());
         message.put("REGISTRATION_DATE", entity.getRegistrationDate());
+        message.put("SECRET_QUESTION", entity.getSecretQuestion());
+        message.put("SECRET_QUESTION_ANSWER", entity.getSecretQuestionAnswer());
         return message;
     }
 
-    private JSONObject generateJsonForGetStatistic(String email) throws JSONException {
+    private JSONObject formatRestorationDataToJson(RegistrationDataEntity entity) throws JSONException {
+        JSONObject message = new JSONObject();
+        message.put("TYPE", "RESTORATION");
+        message.put("NAME", entity.getName());
+        message.put("GENDER", entity.getGender());
+        message.put("DATE_OF_BIRTH", entity.getDateOfBirth());
+        message.put("SECRET_QUESTION", entity.getSecretQuestion());
+        message.put("SECRET_QUESTION_ANSWER", entity.getSecretQuestionAnswer());
+        return message;
+    }
+
+    private JSONObject formatDeleteUserDataToJson(long registrationDate) throws JSONException {
+        JSONObject message = new JSONObject();
+        message.put("TYPE", "DELETE_USER");
+        message.put("REGISTRATION_DATE", registrationDate);
+        return message;
+    }
+
+    private JSONObject generateJsonForGetStatistic(long registrationDate) throws JSONException {
         JSONObject message = new JSONObject();
         message.put("TYPE", "GET_STATISTIC");
-        message.put("EMAIL", email);
+        message.put("REGISTRATION_DATE", registrationDate);
         return message;
     }
 
@@ -266,8 +311,12 @@ public class SocketClient implements ServerConnection {
                     case WRITE_USER:
                         return ServerAnswerType.USER_WRITE_SUCCESS;
                 }
-            } else if (jsonAnswer.getString("STORAGE").equals("DUPLICATE_ERROR")) {
-                return ServerAnswerType.USER_DUPLICATE_ERROR;
+            } else if (jsonAnswer.getString("STORAGE").equals("USER_FOUND")) {
+                return ServerAnswerType.USER_FOUND;
+            } else if (jsonAnswer.getString("STORAGE").equals("USER_NOT_FOUND")) {
+                return ServerAnswerType.USER_NOT_FOUND;
+            } else if (jsonAnswer.getString("STORAGE").equals("USER_DELETED")) {
+                return ServerAnswerType.USER_DELETED;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -296,6 +345,18 @@ public class SocketClient implements ServerConnection {
         }
     }
 
+    private List<Object> parseUserFoundAnswer(String answer) {
+        List<Object> resultList = new ArrayList<>();
+        try {
+            JSONObject jsonAnswer = new JSONObject(answer);
+            resultList.add(jsonAnswer.getString("NAME"));
+            resultList.add(jsonAnswer.getLong("REGISTRATION_DATE"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+
     //// INNER CLASSES
 
     class SocketListener implements Runnable {
@@ -303,14 +364,19 @@ public class SocketClient implements ServerConnection {
         boolean threadStatus;
         ServerQueryType queryType;
         String userName;
+        long registrationDate;
         long confirmationDate;
 
         @Override
         public void run() {
+
+            // TODO Delete test code
+            Log.d(AppController.APP_TAG, "Listener Thread Started");
+
             while (threadStatus) {
                 try {
-                    BufferedReader socketInput = new BufferedReader(
-                            new InputStreamReader(socket.getInputStream()));
+                    InputStreamReader input = new InputStreamReader(socket.getInputStream(), Charset.forName("UTF-8"));
+                    BufferedReader socketInput = new BufferedReader(input);
                     String answer = socketInput.readLine();
 
                     if (queryType == ServerQueryType.GET_STATISTIC) {
@@ -329,15 +395,33 @@ public class SocketClient implements ServerConnection {
                                 break;
                             case USER_WRITE_SUCCESS:
                                 applicationDataStorage.saveUserName(userName);
+                                applicationDataStorage.saveRegistrationDate(registrationDate);
                                 EventBus.getDefault().post(new RegistrationResultEvent(0));
                                 break;
-                            case USER_DUPLICATE_ERROR:
-                                EventBus.getDefault().post(new RegistrationResultEvent(1));
+                            case USER_FOUND:
+                                DownloadStatisticInteractor interactor = new DownloadStatisticInteractor();
+                                List<Object> registrationData = parseUserFoundAnswer(answer);
+
+                                // TODO Delete test code
+                                Log.d(AppController.APP_TAG, (String) registrationData.get(0));
+
+                                applicationDataStorage.saveUserName(((String) registrationData.get(0)));
+                                applicationDataStorage.saveRegistrationDate((long) registrationData.get(1));
+                                interactor.interact((long) registrationData.get(1));
                                 break;
+                            case USER_NOT_FOUND:
+                                EventBus.getDefault().post(new NoStatisticForUserEvent());
                             case BAD_ANSWER:
                                 if (queryType == ServerQueryType.WRITE_USER ||
                                         queryType == ServerQueryType.GET_STATISTIC) EventBus
-                                        .getDefault().post(new RegistrationResultEvent(2));
+                                        .getDefault().post(new RegistrationResultEvent(1));
+                                break;
+                            case USER_DELETED:
+                                applicationDataStorage
+                                        .saveRegistrationDate(ApplicationDataStorage.DEFAULT_REGISTRATION_DATE_VALUE);
+                                applicationDataStorage
+                                        .saveUserName(ApplicationDataStorage.DEFAULT_USER_NAME_VALUE);
+                                EventBus.getDefault().post(new UserDeletedEvent());
                                 break;
                         }
                     }

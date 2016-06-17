@@ -1,4 +1,4 @@
 package evgenykravtsov.habitbreaking.network.event;
 
-public class NoStatisticForEmailEvent {
+public class NoStatisticForUserEvent {
 }

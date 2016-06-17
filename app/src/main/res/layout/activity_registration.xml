@@ -1,95 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@drawable/standard_screen_background"
+    android:animateLayoutChanges="true"
     android:id="@+id/registration_activity_container_view">
 
     <include layout="@layout/toolbar" />
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:gravity="center_horizontal">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/hint_name"
-            android:textSize="17sp"
-            android:ellipsize="start"
-            android:gravity="center_horizontal"
-            android:theme="@style/CustomEditText"
-            android:id="@+id/registration_activity_name_edit_text"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/hint_date_of_birth"
-            android:textSize="17sp"
-            android:textAllCaps="false"
-            android:theme="@style/GreenButton"
-            android:id="@+id/registration_activity_date_of_birth_button" />
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        card_view:cardCornerRadius="4dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name"
+                android:inputType="text"
+                android:id="@+id/registration_activity_name_edit_text"
+                style="@style/RegistrationEditText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hint_gender"
-                android:textSize="17sp"
-                android:layout_gravity="center_vertical" />
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="@string/hint_date_of_birth"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/registration_activity_date_of_birth_hint_text_view" />
 
-            <RadioGroup
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_day"
+                    android:inputType="numberDecimal"
+                    android:maxLength="2"
+                    android:id="@+id/registration_activity_day_edit_text"
+                    style="@style/RegistrationEditText" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/registration_activity_month_spinner" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_year"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:id="@+id/registration_activity_year_edit_text"
+                    style="@style/RegistrationEditText" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/registration_activity_gender_radio_group">
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatRadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/male_button_label"
-                    android:textSize="17sp"
-                    android:id="@+id/registration_activity_male_radio_button"
-                    app:buttonTint="@color/colorPrimaryDark" />
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/hint_gender"
+                    android:textSize="15sp"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/registration_activity_gender_hint_text_view" />
 
-                <android.support.v7.widget.AppCompatRadioButton
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/female_button_label"
-                    android:textSize="17sp"
-                    android:id="@+id/registration_activity_female_radio_button"
-                    app:buttonTint="@color/colorPrimaryDark" />
+                    android:orientation="horizontal"
+                    android:id="@+id/registration_activity_gender_radio_group">
 
-            </RadioGroup>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male_button_label"
+                        android:textSize="17sp"
+                        android:id="@+id/registration_activity_male_radio_button"
+                        app:buttonTint="@color/colorPrimary" />
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female_button_label"
+                        android:textSize="17sp"
+                        android:id="@+id/registration_activity_female_radio_button"
+                        app:buttonTint="@color/colorPrimary" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="35dp"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/registration_activity_secret_question_spinner" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:minHeight="30dp"
+                    android:layout_marginTop="15dp"
+                    android:hint="@string/hint_answer"
+                    android:inputType="text"
+                    android:id="@+id/registration_activity_secret_answer_edit_text"
+                    style="@style/RegistrationEditText" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/send_button_label"
+                android:id="@+id/registration_activity_send_button"
+                android:theme="@style/RedButton" />
 
         </LinearLayout>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/registration_activity_secret_question_spinner" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/send_button_label"
-            android:id="@+id/registration_activity_send_button"
-            android:theme="@style/RedButton" />
-
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </FrameLayout>

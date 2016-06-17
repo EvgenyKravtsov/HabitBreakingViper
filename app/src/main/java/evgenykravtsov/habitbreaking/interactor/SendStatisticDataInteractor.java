@@ -30,7 +30,7 @@ public class SendStatisticDataInteractor {
     //// PUBLIC METHODS
 
     public void interact() {
-        if (applicationDataStorage.loadUserName().equals(ApplicationDataStorage.DEFAULT_USER_NAME_VALUE)) {
+        if (applicationDataStorage.loadRegistrationDate() == ApplicationDataStorage.DEFAULT_REGISTRATION_DATE_VALUE) {
 
             // TODO Delete test code
             Log.d(AppController.APP_TAG, "User Is Not Registered");

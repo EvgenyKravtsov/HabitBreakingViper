@@ -15,7 +15,7 @@ import evgenykravtsov.habitbreaking.network.ServerConnection;
 import evgenykravtsov.habitbreaking.network.ServerConnectionListener;
 import evgenykravtsov.habitbreaking.network.event.DownloadDataEvent;
 import evgenykravtsov.habitbreaking.network.event.NoInternetConnectionEvent;
-import evgenykravtsov.habitbreaking.network.event.NoStatisticForEmailEvent;
+import evgenykravtsov.habitbreaking.network.event.NoStatisticForUserEvent;
 
 public class DownloadStatisticInteractor implements ServerConnectionListener {
 
@@ -32,7 +32,7 @@ public class DownloadStatisticInteractor implements ServerConnectionListener {
 
     //// PUBLIC METHODS
 
-    public void interact(String email) {
+    public void interact(long registrationDate) {
         if (!AppController.isInternetAvailable()) {
             EventBus.getDefault().post(new NoInternetConnectionEvent());
             return;
@@ -40,7 +40,7 @@ public class DownloadStatisticInteractor implements ServerConnectionListener {
 
         EventBus.getDefault().post(new DownloadDataEvent(0));
         serverConnection.setServerConnectionListener(this);
-        serverConnection.getStatistic(email);
+        serverConnection.getStatistic(registrationDate);
     }
 
     //// SERVER CONNECTION LISTENER INTERFACE
@@ -61,7 +61,7 @@ public class DownloadStatisticInteractor implements ServerConnectionListener {
             statisticDataStorage.clearStatisticStorage();
             statisticDataStorage.saveStatistic(entities);
         } else {
-            EventBus.getDefault().post(new NoStatisticForEmailEvent());
+            EventBus.getDefault().post(new NoStatisticForUserEvent());
         }
 
         serverConnection.removeServerConnectionListener(this);
