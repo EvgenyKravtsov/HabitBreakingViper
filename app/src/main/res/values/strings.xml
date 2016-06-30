@@ -59,7 +59,7 @@
     <string name="hint_secret_question">Secret Question</string>
     <string name="male_button_label">Male</string>
     <string name="female_button_label">Female</string>
-    <string name="send_button_label">Send</string>
+    <string name="send_button_label">Registration</string>
     <string-array name="secret_question_array">
         <item>Mother\'s maiden name?</item>
         <item>On what street you lived in the third grade?</item>
@@ -81,6 +81,23 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+
+    <!-- Consumption Details Fragment Strings -->
+    <string name="enter_all_data_warning">Enter all required data</string>
+    <string name="details_saved_warning">Data saved</string>
+    <string name="milligram_label">mg</string>
+    <string name="input_label">Enter resin and nicotine content of your cigarettes</string>
+    <string name="resin_label">Resin (mg/cig)</string>
+    <string name="nicotine_label">Nicotine (mg/cig)</string>
+    <string name="save_button_label">Save</string>
+    <string name="input_summary_label">Consumption overall:</string>
+    <string name="resin_summary_label">resin</string>
+    <string name="nicotine_summary_label">nicotine</string>
+    <string name="discard_button_label">Discard</string>
+
+    <!-- Statistic Activity Strings -->
+    <string name="statistic_activity_label">Overall statistic</string>
+    <string name="delete_statistic_entry_warning">Delete statistic for this day?</string>
 
     <!-- General Strings -->
     <string name="no_internet_connection_warning">No internet connection available</string>

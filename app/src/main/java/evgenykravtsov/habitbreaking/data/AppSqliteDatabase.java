@@ -179,6 +179,45 @@ public class AppSqliteDatabase extends SQLiteOpenHelper implements StatisticData
         return statisticDaysCount;
     }
 
+    @Override
+    public int getConsumptionCountSummary() {
+        Cursor cursor = database.rawQuery("SELECT * FROM " + STATISTIC_TABLE_NAME, null);
+        int countSummary = 0;
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            countSummary += cursor.getInt(1);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return countSummary;
+    }
+
+    @Override
+    public void deleteStatisticEntryByIndex(int index) {
+        Cursor cursor = database.rawQuery("SELECT * FROM " + STATISTIC_TABLE_NAME +
+                " ORDER BY " + COLUMN_DATE + " ASC", null);
+        cursor.moveToFirst();
+
+        // TODO Delete test code
+        Log.d("Log", "" + index);
+
+        int i = 0;
+        long dateToDelete = 0;
+        while (!cursor.isAfterLast()) {
+            if (i == index) dateToDelete = cursor.getLong(0);
+            cursor.moveToNext();
+            i++;
+        }
+
+        // TODO Delete test code
+        Log.d("Log", "" + dateToDelete);
+
+        database.delete(STATISTIC_TABLE_NAME, COLUMN_DATE + " = " + dateToDelete, null);
+        cursor.close();
+    }
+
     //// SQLITE DATABASE LIFECYCLE
 
     @Override

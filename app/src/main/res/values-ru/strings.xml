@@ -61,7 +61,7 @@
     <string name="hint_secret_question">Секретный вопрос</string>
     <string name="male_button_label">Мужской</string>
     <string name="female_button_label">Женский</string>
-    <string name="send_button_label">Отправить</string>
+    <string name="send_button_label">Регистрация</string>
     <string-array name="secret_question_array">
         <item>Девичья фамилия матери?</item>
         <item>На какой улице вы жили в третьем классе?</item>
@@ -83,6 +83,23 @@
         <item>ноября</item>
         <item>декабря</item>
     </string-array>
+
+    <!-- Consumption Details Fragment Strings -->
+    <string name="enter_all_data_warning">Заполните все поля</string>
+    <string name="details_saved_warning">Данные сохранены</string>
+    <string name="milligram_label">мг</string>
+    <string name="input_label">Укажите содержание смолы и никотина в ваших сигаретах</string>
+    <string name="resin_label">Смола (мг/сиг)</string>
+    <string name="nicotine_label">Никотин (мг/сиг)</string>
+    <string name="save_button_label">Сохранить</string>
+    <string name="input_summary_label">Всего употреблено:</string>
+    <string name="resin_summary_label">смолы</string>
+    <string name="nicotine_summary_label">никотина</string>
+    <string name="discard_button_label">Сбросить</string>
+
+    <!-- Statistic Activity Strings -->
+    <string name="statistic_activity_label">Статистика потребления</string>
+    <string name="delete_statistic_entry_warning">Удалить статистику за этот день?</string>
 
     <!-- General Strings -->
     <string name="no_internet_connection_warning">Отсутствует интернет-соединение</string>

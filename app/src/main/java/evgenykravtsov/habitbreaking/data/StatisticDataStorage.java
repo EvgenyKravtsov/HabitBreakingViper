@@ -27,4 +27,8 @@ public interface StatisticDataStorage {
     List<StatisticDataEntity> getStatisticForPeriod(int numberOfDays);
 
     int getStatisticDaysCount();
+
+    int getConsumptionCountSummary();
+
+    void deleteStatisticEntryByIndex(int index);
 }

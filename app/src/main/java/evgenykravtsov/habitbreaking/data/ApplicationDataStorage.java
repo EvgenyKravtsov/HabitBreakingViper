@@ -1,5 +1,6 @@
 package evgenykravtsov.habitbreaking.data;
 
+import evgenykravtsov.habitbreaking.domain.model.ConsumptionDetailsDataEntity;
 import evgenykravtsov.habitbreaking.domain.model.Mode;
 
 public interface ApplicationDataStorage {
@@ -22,6 +23,17 @@ public interface ApplicationDataStorage {
     String DEFAULT_USER_NAME_VALUE = "";
     String KEY_REGISTRATION_DATE = "key_registration_date";
     long DEFAULT_REGISTRATION_DATE_VALUE = 0;
+    String KEY_RESIN = "key_resin";
+    double DEFAULT_RESIN_VALUE = 0.0;
+    String KEY_NICOTINE = "key_nicotine";
+    double DEFAULT_NICOTINE_VALUE = 0.0;
+    String KEY_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS =
+            "key_consumption_details_calculating_status";
+    boolean DEFAULT_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS_VALUE = false;
+    String KEY_RESIN_SUMMARY = "key_resin_summary";
+    double DEFAULT_RESIN_SUMMARY_VALUE = 0.0;
+    String KEY_NICOTINE_SUMMARY = "key_nicotine_summary";
+    double DEFAULT_NICOTINE_SUMMARY_VALUE = 0.0;
 
     ////
 
@@ -56,4 +68,16 @@ public interface ApplicationDataStorage {
     void saveRegistrationDate(long registrationDate);
 
     long loadRegistrationDate();
+
+    void saveConsumptionDetailsData(ConsumptionDetailsDataEntity data);
+
+    ConsumptionDetailsDataEntity loadConsumptionDetailsData();
+
+    void saveConsumptionDetailsInitailCalculatingStatus(boolean status);
+
+    boolean loadConsumptionDetailsInitialCalculatingStatus();
+
+    void saveConsumptionDetailsSummary(ConsumptionDetailsDataEntity data);
+
+    ConsumptionDetailsDataEntity loadConsumptionDetailsSummary();
 }

@@ -33,7 +33,7 @@ import evgenykravtsov.habitbreaking.network.event.UserDeletedEvent;
 
 public class SocketClient implements ServerConnection {
 
-    private static final String SERVER_ADDRESS = "10.0.3.99";       //"195.42.183.52";
+    private static final String SERVER_ADDRESS = "195.42.183.52";       //"195.42.183.52";
     private static final int SERVER_PORT = 8080;             //8080;
     private static final int CONNECTION_TIMEOUT_INTERVAL = 5000; // Milliseconds
 

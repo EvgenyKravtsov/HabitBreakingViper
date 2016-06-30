@@ -6,6 +6,7 @@ import evgenykravtsov.habitbreaking.data.ApplicationDataStorage;
 import evgenykravtsov.habitbreaking.data.DataModuleFactory;
 import evgenykravtsov.habitbreaking.data.StatisticDataStorage;
 import evgenykravtsov.habitbreaking.domain.Utils;
+import evgenykravtsov.habitbreaking.domain.model.ConsumptionDetailsDataEntity;
 import evgenykravtsov.habitbreaking.interactor.event.ConsumptionLockEvent;
 
 public class ConsumptionInteractor {
@@ -25,6 +26,7 @@ public class ConsumptionInteractor {
 
     public void interact() {
         statisticDataStorage.registerConsumption();
+        updateConsumptionDetailsSummary();
 
         switch (applicationDataStorage.loadMode()) {
             case FREE:
@@ -75,5 +77,19 @@ public class ConsumptionInteractor {
     private void emitConsumptionLockEvent() {
         ConsumptionLockEvent event = new ConsumptionLockEvent(true);
         EventBus.getDefault().post(event);
+    }
+
+    private void updateConsumptionDetailsSummary() {
+        ConsumptionDetailsDataEntity consumptionDetails =
+                applicationDataStorage.loadConsumptionDetailsData();
+        ConsumptionDetailsDataEntity consumptionDetailsSummary =
+                applicationDataStorage.loadConsumptionDetailsSummary();
+
+        ConsumptionDetailsDataEntity consumptionDetailsSummaryUpdated =
+                new ConsumptionDetailsDataEntity(
+                        consumptionDetailsSummary.getResin() + consumptionDetails.getResin(),
+                        consumptionDetailsSummary.getNicotine() + consumptionDetails.getNicotine());
+
+        applicationDataStorage.saveConsumptionDetailsSummary(consumptionDetailsSummaryUpdated);
     }
 }

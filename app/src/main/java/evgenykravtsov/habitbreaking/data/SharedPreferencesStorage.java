@@ -3,6 +3,7 @@ package evgenykravtsov.habitbreaking.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import evgenykravtsov.habitbreaking.domain.model.ConsumptionDetailsDataEntity;
 import evgenykravtsov.habitbreaking.domain.model.Mode;
 import evgenykravtsov.habitbreaking.domain.os.AppController;
 
@@ -119,6 +120,49 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
                 ApplicationDataStorage.DEFAULT_REGISTRATION_DATE_VALUE);
     }
 
+    @Override
+    public void saveConsumptionDetailsData(ConsumptionDetailsDataEntity data) {
+        saveDouble(ApplicationDataStorage.KEY_RESIN, data.getResin());
+        saveDouble(ApplicationDataStorage.KEY_NICOTINE, data.getNicotine());
+    }
+
+    @Override
+    public ConsumptionDetailsDataEntity loadConsumptionDetailsData() {
+        return new ConsumptionDetailsDataEntity(
+                loadDouble(ApplicationDataStorage.KEY_RESIN,
+                        ApplicationDataStorage.DEFAULT_RESIN_VALUE),
+                loadDouble(ApplicationDataStorage.KEY_NICOTINE,
+                        ApplicationDataStorage.DEFAULT_NICOTINE_VALUE));
+    }
+
+    @Override
+    public void saveConsumptionDetailsInitailCalculatingStatus(boolean status) {
+        saveBoolean(
+                ApplicationDataStorage.KEY_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS, status);
+    }
+
+    @Override
+    public boolean loadConsumptionDetailsInitialCalculatingStatus() {
+        return loadBoolean(
+                ApplicationDataStorage.KEY_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS,
+                ApplicationDataStorage.DEFAULT_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS_VALUE);
+    }
+
+    @Override
+    public void saveConsumptionDetailsSummary(ConsumptionDetailsDataEntity data) {
+        saveDouble(ApplicationDataStorage.KEY_RESIN_SUMMARY, data.getResin());
+        saveDouble(ApplicationDataStorage.KEY_NICOTINE_SUMMARY, data.getNicotine());
+    }
+
+    @Override
+    public ConsumptionDetailsDataEntity loadConsumptionDetailsSummary() {
+        return new ConsumptionDetailsDataEntity(
+                loadDouble(ApplicationDataStorage.KEY_RESIN_SUMMARY,
+                        ApplicationDataStorage.DEFAULT_RESIN_SUMMARY_VALUE),
+                loadDouble(ApplicationDataStorage.KEY_NICOTINE_SUMMARY,
+                        ApplicationDataStorage.DEFAULT_NICOTINE_SUMMARY_VALUE));
+    }
+
     //// PRIVATE METHODS
 
     private void saveLong(String key, long value) {
@@ -159,6 +203,16 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
 
     private String loadString(String key, String defaultValue) {
         return sharedPreferences.getString(key, defaultValue);
+    }
+
+    private void saveDouble(String key, double value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(key, (float) value);
+        editor.apply();
+    }
+
+    private double loadDouble(String key, double defaultValue) {
+        return sharedPreferences.getFloat(key, (float) defaultValue);
     }
 
     private int modeToInt(Mode mode) {

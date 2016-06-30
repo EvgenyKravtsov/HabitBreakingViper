@@ -4,77 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_activity_drawer_layout">
+    android:background="@drawable/standard_screen_background"
+    android:id="@+id/main_pager_activity_drawer_layout">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/standard_screen_background"
-        android:animateLayoutChanges="true"
-        android:id="@+id/main_activity_container_view"
-        tools:context=".view.activity.MainActivity">
+        android:orientation="vertical">
 
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:id="@+id/main_activity_toolbar" />
+            android:id="@+id/main_pager_activity_toolbar" />
 
-        <!-- Consume Button Group -->
-        <LinearLayout
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_below="@+id/main_activity_toolbar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="40dp"
-            android:background="@drawable/consume_button_background"
-            android:id="@+id/main_activity_consume_button">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:src="@drawable/consume_button_icon"
-                android:scaleType="centerInside"
-                android:contentDescription="@string/consume_button_content_description" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="3dp"
-                android:background="@android:color/white" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:gravity="center_horizontal"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:id="@+id/main_activity_timer_value_text_view"
-                tools:text="00:00:00" />
-
-        </LinearLayout>
-
-        <!--
-        <com.jjoe64.graphview.GraphView
+        <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/main_activity_statistic_chart_view" /> -->
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            android:id="@+id/main_pager_activity_view_pager">
 
-        <lecho.lib.hellocharts.view.LineChartView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentBottom="true"
-            android:padding="10dp"
-            android:id="@+id/main_activity_statistic_chart_view" />
 
-    </RelativeLayout>
+
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
@@ -110,7 +64,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/main_activity_user_name_text_view" />
+                android:id="@+id/main_pager_activity_user_name_text_view" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -128,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/modes_button_label"
-                    android:id="@+id/main_activity_modes_button"
+                    android:id="@+id/main_pager_activity_modes_button"
                     tools:ignore="RtlSymmetry"
                     style="@style/DrawerMenuButton" />
 
@@ -136,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/registration_activity_label"
-                    android:id="@+id/main_activity_registraion_button"
+                    android:id="@+id/main_pager_activity_registraion_button"
                     tools:ignore="RtlSymmetry"
                     style="@style/DrawerMenuButton" />
 
@@ -144,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/restore_statistic_button_label"
-                    android:id="@+id/main_activity_restore_statistic_button"
+                    android:id="@+id/main_pager_activity_restore_statistic_button"
                     tools:ignore="RtlSymmetry"
                     style="@style/DrawerMenuButton" />
 
@@ -152,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/delete_account_button_label"
-                    android:id="@+id/main_activity_delete_account_button"
+                    android:id="@+id/main_pager_activity_delete_account_button"
                     tools:ignore="RtlSymmetry"
                     style="@style/DrawerMenuButton" />
 
@@ -160,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/delete_statistic_button_label"
-                    android:id="@+id/main_activity_delete_statistic_button"
+                    android:id="@+id/main_pager_activity_delete_statistic_button"
                     tools:ignore="RtlSymmetry"
                     style="@style/DrawerMenuButton" />
 

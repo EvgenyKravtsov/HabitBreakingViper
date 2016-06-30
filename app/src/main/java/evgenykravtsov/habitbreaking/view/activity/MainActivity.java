@@ -37,6 +37,7 @@ import evgenykravtsov.habitbreaking.R;
 import evgenykravtsov.habitbreaking.domain.model.StatisticDataEntity;
 import evgenykravtsov.habitbreaking.presenter.MainViewPresenter;
 import evgenykravtsov.habitbreaking.view.MainView;
+import lecho.lib.hellocharts.gesture.ContainerScrollType;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
@@ -46,9 +47,10 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
-    // TODO Fix chart viewport
+    // TODO Delete MainActivity before release
 
-    private static final int NUMBER_OF_DAYS_FOR_STATISTIC = 7;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final int NUMBER_OF_DAYS_FOR_STATISTIC = 30;
 
     private MainViewPresenter presenter;
     private ProgressDialog progressDialog;
@@ -300,6 +302,44 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void showStatistic(List<StatisticDataEntity> statisticData) {
+//        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd.MM\nEEE");
+//
+//        Collections.reverse(statisticData);
+//
+//        DataPoint[] dataPoints = new DataPoint[statisticData.size()];
+//        for (int i = 0; i < statisticData.size(); i++) {
+//            dataPoints[i] = new DataPoint(i, statisticData.get(i).getCount());
+//        }
+//
+//        LineGraphSeries<DataPoint> lineGraphSeries = new LineGraphSeries<>(dataPoints);
+//        statisticChartView.addSeries(lineGraphSeries);
+//
+//        statisticChartView.getGridLabelRenderer().setNumHorizontalLabels(7);
+//
+//        statisticChartView.getViewport().setXAxisBoundsManual(true);
+//        statisticChartView.getViewport().setMinX(0);
+//        statisticChartView.getViewport().setMaxX(7);
+//
+//        statisticChartView.getViewport().setScrollable(true);
+//
+//        statisticChartView.getGridLabelRenderer().setVerticalLabelsVisible(false);
+//        statisticChartView.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // TODO Under consideration
         if (statisticData == null || statisticData.size() <= 0) {
             statisticChartView.setVisibility(View.INVISIBLE);
             return;
@@ -325,6 +365,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void prepareChartView(List<PointValue> values, List<AxisValue> axisValues) {
+
+        // TODO Under consideration
+
         int colorContrast = getResources().getColor(R.color.colorContrast);
         int colorDark = getResources().getColor(R.color.colorPrimaryDark);
         Typeface robotoTypeface = Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
@@ -354,7 +397,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         data.setValueLabelTypeface(robotoTypeface);
 
         statisticChartView.setLineChartData(data);
-        statisticChartView.setScrollEnabled(false);
+        statisticChartView.setScrollEnabled(true);
+        statisticChartView.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL);
         statisticChartView.setZoomEnabled(false);
     }
 

@@ -25,6 +25,11 @@
         <activity
             android:name=".view.activity.MainActivity"
             android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".view.activity.MainPagerActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -40,6 +45,10 @@
             android:name=".view.activity.RegistrationActivity"
             android:label="@string/registration_activity_label"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.StatisticActivity"
+            android:screenOrientation="landscape" />
 
         <service android:name=".domain.ConsumptionManagerService" />
 

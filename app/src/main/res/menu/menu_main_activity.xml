@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:title="STATISTIC"
+        android:icon="@drawable/menu_button_statistic"
+        app:showAsAction="ifRoom"
+        android:id="@+id/main_activity_statistic_button" />
+
+    <item
         android:title="MENU"
         android:icon="@drawable/menu_button_icon"
         app:showAsAction="always"
