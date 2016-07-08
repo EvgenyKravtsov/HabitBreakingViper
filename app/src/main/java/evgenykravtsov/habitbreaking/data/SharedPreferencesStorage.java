@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import evgenykravtsov.habitbreaking.domain.model.ConsumptionDetailsDataEntity;
+import evgenykravtsov.habitbreaking.domain.model.CostDetailsDataEntity;
 import evgenykravtsov.habitbreaking.domain.model.Mode;
 import evgenykravtsov.habitbreaking.domain.os.AppController;
 
@@ -124,6 +125,7 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
     public void saveConsumptionDetailsData(ConsumptionDetailsDataEntity data) {
         saveDouble(ApplicationDataStorage.KEY_RESIN, data.getResin());
         saveDouble(ApplicationDataStorage.KEY_NICOTINE, data.getNicotine());
+        saveDouble(ApplicationDataStorage.KEY_CO, data.getCo());
     }
 
     @Override
@@ -132,7 +134,9 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
                 loadDouble(ApplicationDataStorage.KEY_RESIN,
                         ApplicationDataStorage.DEFAULT_RESIN_VALUE),
                 loadDouble(ApplicationDataStorage.KEY_NICOTINE,
-                        ApplicationDataStorage.DEFAULT_NICOTINE_VALUE));
+                        ApplicationDataStorage.DEFAULT_NICOTINE_VALUE),
+                loadDouble(ApplicationDataStorage.KEY_CO,
+                        ApplicationDataStorage.DEFAULT_CO_VALUE));
     }
 
     @Override
@@ -152,6 +156,7 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
     public void saveConsumptionDetailsSummary(ConsumptionDetailsDataEntity data) {
         saveDouble(ApplicationDataStorage.KEY_RESIN_SUMMARY, data.getResin());
         saveDouble(ApplicationDataStorage.KEY_NICOTINE_SUMMARY, data.getNicotine());
+        saveDouble(ApplicationDataStorage.KEY_CO_SUMMARY, data.getCo());
     }
 
     @Override
@@ -160,7 +165,22 @@ public class SharedPreferencesStorage implements ApplicationDataStorage {
                 loadDouble(ApplicationDataStorage.KEY_RESIN_SUMMARY,
                         ApplicationDataStorage.DEFAULT_RESIN_SUMMARY_VALUE),
                 loadDouble(ApplicationDataStorage.KEY_NICOTINE_SUMMARY,
-                        ApplicationDataStorage.DEFAULT_NICOTINE_SUMMARY_VALUE));
+                        ApplicationDataStorage.DEFAULT_NICOTINE_SUMMARY_VALUE),
+                loadDouble(ApplicationDataStorage.KEY_CO_SUMMARY,
+                        ApplicationDataStorage.DEFAULT_CO_SUMMARY_VALUE));
+    }
+
+    @Override
+    public void saveCostDetailsData(CostDetailsDataEntity data) {
+        saveDouble(KEY_COST, data.getValue());
+        saveString(KEY_CURRENCY_TYPE, data.getCurrencyType());
+    }
+
+    @Override
+    public CostDetailsDataEntity loadCostDetailsData() {
+        double value = loadDouble(KEY_COST, DEFAULT_COST_VALUE);
+        String currencyType = loadString(KEY_CURRENCY_TYPE, DEFAULT_CURRENCY_TYPE_VALUE);
+        return new CostDetailsDataEntity(value, currencyType);
     }
 
     //// PRIVATE METHODS

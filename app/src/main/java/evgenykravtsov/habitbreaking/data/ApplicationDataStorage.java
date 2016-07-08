@@ -1,6 +1,7 @@
 package evgenykravtsov.habitbreaking.data;
 
 import evgenykravtsov.habitbreaking.domain.model.ConsumptionDetailsDataEntity;
+import evgenykravtsov.habitbreaking.domain.model.CostDetailsDataEntity;
 import evgenykravtsov.habitbreaking.domain.model.Mode;
 
 public interface ApplicationDataStorage {
@@ -27,6 +28,8 @@ public interface ApplicationDataStorage {
     double DEFAULT_RESIN_VALUE = 0.0;
     String KEY_NICOTINE = "key_nicotine";
     double DEFAULT_NICOTINE_VALUE = 0.0;
+    String KEY_CO = "key_co";
+    double DEFAULT_CO_VALUE = 0.0;
     String KEY_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS =
             "key_consumption_details_calculating_status";
     boolean DEFAULT_CONSUMPTION_DETAILS_INITIAL_CALCULATING_STATUS_VALUE = false;
@@ -34,6 +37,14 @@ public interface ApplicationDataStorage {
     double DEFAULT_RESIN_SUMMARY_VALUE = 0.0;
     String KEY_NICOTINE_SUMMARY = "key_nicotine_summary";
     double DEFAULT_NICOTINE_SUMMARY_VALUE = 0.0;
+    String KEY_CO_SUMMARY = "key_co_summary";
+    double DEFAULT_CO_SUMMARY_VALUE = 0.0;
+    String KEY_COST = "key_cost";
+    double DEFAULT_COST_VALUE = 0.0;
+    String KEY_CURRENCY_TYPE = "key_currency_type";
+    String DEFAULT_CURRENCY_TYPE_VALUE = "";
+    String KEY_COST_SUMMARY = "key_cost_summary";
+    double DEFAULT_COST_SUMMARY_VALUE = 0.0;
 
     ////
 
@@ -80,4 +91,8 @@ public interface ApplicationDataStorage {
     void saveConsumptionDetailsSummary(ConsumptionDetailsDataEntity data);
 
     ConsumptionDetailsDataEntity loadConsumptionDetailsSummary();
+
+    void saveCostDetailsData(CostDetailsDataEntity data);
+
+    CostDetailsDataEntity loadCostDetailsData();
 }

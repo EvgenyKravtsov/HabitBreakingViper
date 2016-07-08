@@ -55,7 +55,7 @@ public class ConsumptionViewPresenter {
 
     public void deleteDayFromStatistic(int index) {
         DeleteStatisticEntryInteractor interactor = new DeleteStatisticEntryInteractor();
-        interactor.execute(index);
+        interactor.executeForLastWeek(index);
     }
 
     ////

@@ -20,6 +20,11 @@ public class DeleteStatisticEntryInteractor {
     ////
 
     public void execute(int index) {
+        statisticDataStorage.deleteStatisticEntryByIndex(index);
+        EventBus.getDefault().post(new StatisticEntryDeletedEvent());
+    }
+
+    public void executeForLastWeek(int index) {
         if (index == 0) return;
 
         int statisticDaysCount = statisticDataStorage.getStatisticDaysCount();

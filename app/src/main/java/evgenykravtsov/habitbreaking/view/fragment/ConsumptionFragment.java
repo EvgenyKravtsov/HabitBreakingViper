@@ -110,6 +110,7 @@ public class ConsumptionFragment extends Fragment implements ConsumptionView {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_consumption, container, false);
         ButterKnife.bind(this, view);
+        setFonts();
         return view;
     }
 
@@ -256,6 +257,12 @@ public class ConsumptionFragment extends Fragment implements ConsumptionView {
                 .setNegativeButton(getString(android.R.string.cancel), null)
                 .create();
         dialog.show();
+    }
+
+    private void setFonts() {
+        Typeface robotoTypeface =
+                Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Light.ttf");
+        timerValueTextView.setTypeface(robotoTypeface);
     }
 }
 

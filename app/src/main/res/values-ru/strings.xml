@@ -15,6 +15,8 @@
     <string name="restore_button_label">Восстановление</string>
     <string name="modes_button_label">Режимы работы</string>
     <string name="user_deleted_warning">Ваш аккаунт был успешно удален</string>
+    <string name="statistic_delete_warning">Вы хотите удалить всю статистику?</string>
+    <string name="user_delete_warning">Вы хотите удалить учетную запись?</string>
 
     <!-- Modes Activity Strings -->
     <string name="modes_activity_label">Выберите режим</string>
@@ -88,7 +90,7 @@
     <string name="enter_all_data_warning">Заполните все поля</string>
     <string name="details_saved_warning">Данные сохранены</string>
     <string name="milligram_label">мг</string>
-    <string name="input_label">Укажите содержание смолы и никотина в ваших сигаретах</string>
+    <string name="input_label">Укажите содержание смолы, CO и никотина в ваших сигаретах</string>
     <string name="resin_label">Смола (мг/сиг)</string>
     <string name="nicotine_label">Никотин (мг/сиг)</string>
     <string name="save_button_label">Сохранить</string>
@@ -96,6 +98,14 @@
     <string name="resin_summary_label">смолы</string>
     <string name="nicotine_summary_label">никотина</string>
     <string name="discard_button_label">Сбросить</string>
+    <string name="co_label">CO (мг/сиг)</string>
+    <string name="co_summary_label">CO</string>
+    <string-array name="currency_label_array">
+        <item>USD</item>
+        <item>GBP</item>
+        <item>RUB</item>
+        <item>EUR</item>
+    </string-array>
 
     <!-- Statistic Activity Strings -->
     <string name="statistic_activity_label">Статистика потребления</string>

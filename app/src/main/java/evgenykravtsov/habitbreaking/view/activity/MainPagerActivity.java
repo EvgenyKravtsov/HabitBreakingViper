@@ -1,6 +1,7 @@
 package evgenykravtsov.habitbreaking.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -41,6 +42,10 @@ public class MainPagerActivity extends AppCompatActivity implements MainPagerVie
     String userDeletedWarning;
     @BindString(R.string.downloading_process_warning)
     String downloadingProcessWarning;
+    @BindString(R.string.statistic_delete_warning)
+    String statisticDeleteWarning;
+    @BindString(R.string.user_delete_warning)
+    String userDeleteWarning;
 
     @BindView(R.id.main_pager_activity_drawer_layout)
     DrawerLayout drawerLayout;
@@ -73,7 +78,7 @@ public class MainPagerActivity extends AppCompatActivity implements MainPagerVie
 
     @OnClick(R.id.main_pager_activity_delete_statistic_button)
     public void onDeleteStatisticButtonClicked() {
-        presenter.deleteStatistic();
+        userCheckDeleteStatistic();
     }
 
     @OnClick(R.id.main_pager_activity_restore_statistic_button)
@@ -83,7 +88,7 @@ public class MainPagerActivity extends AppCompatActivity implements MainPagerVie
 
     @OnClick(R.id.main_pager_activity_delete_account_button)
     public void onDeleteAccountButtonClicked() {
-        presenter.deleteUser();
+        userCheckDeleteUser();
     }
 
     ////
@@ -244,6 +249,34 @@ public class MainPagerActivity extends AppCompatActivity implements MainPagerVie
     private void navigateToStatisticActivity() {
         Intent intent = new Intent(this, StatisticActivity.class);
         startActivity(intent);
+    }
+
+    private void userCheckDeleteStatistic() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setMessage(statisticDeleteWarning)
+                .setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.deleteStatistic();
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.cancel), null)
+                .create();
+        dialog.show();
+    }
+
+    private void userCheckDeleteUser() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setMessage(userDeleteWarning)
+                .setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.deleteUser();
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.cancel), null)
+                .create();
+        dialog.show();
     }
 
     private void setFonts() {

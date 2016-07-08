@@ -23,11 +23,6 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity
-            android:name=".view.activity.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
             android:name=".view.activity.MainPagerActivity"
             android:screenOrientation="portrait">
             <intent-filter>

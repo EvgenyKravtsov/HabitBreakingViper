@@ -135,6 +135,7 @@ public class StatisticActivity extends AppCompatActivity implements StatisticVie
         xAxis.setValues(axisValues);
         xAxis.setTextColor(colorDark);
         xAxis.setTypeface(robotoTypeface);
+        xAxis.setHasLines(true);
 
         LineChartData data = new LineChartData();
         data.setLines(lines);

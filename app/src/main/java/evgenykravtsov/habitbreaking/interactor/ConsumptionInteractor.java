@@ -88,7 +88,8 @@ public class ConsumptionInteractor {
         ConsumptionDetailsDataEntity consumptionDetailsSummaryUpdated =
                 new ConsumptionDetailsDataEntity(
                         consumptionDetailsSummary.getResin() + consumptionDetails.getResin(),
-                        consumptionDetailsSummary.getNicotine() + consumptionDetails.getNicotine());
+                        consumptionDetailsSummary.getNicotine() + consumptionDetails.getNicotine(),
+                        consumptionDetailsSummary.getCo() + consumptionDetails.getCo());
 
         applicationDataStorage.saveConsumptionDetailsSummary(consumptionDetailsSummaryUpdated);
     }
